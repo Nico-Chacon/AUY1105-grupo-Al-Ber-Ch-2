@@ -5,6 +5,10 @@
 ![Demo del módulo](hi-hello.gif)
 
 # Prueba Nº2 Alvarez, Berardinucci y Chacón 
+## INFO
+Este repositorio es basado en:
+https://github.com/Nico-Chacon/AUY1105-grupo-Al-Ber-Ch
+
 
 ## Descripción
 Este módulo de Terraform implementa recursos de infraestructura en AWS de manera modular y reutilizable. Incluye la creación de una instancia EC2 parametrizada, junto con outputs para obtener su ID y dirección IP pública. El objetivo es facilitar la integración en distintos entornos, siguiendo buenas prácticas de documentación, versionado semántico y estructura de código.
