@@ -49,3 +49,7 @@
 ## [2.1.1] - 2026-06-05
 ## Added
 - Se agrego `hi-hello.gif` a `README.md`
+
+## [2.1.1] - 2026-06-05
+## Fixed
+- Se arreglo `variables.tf` dentro de `infra`
