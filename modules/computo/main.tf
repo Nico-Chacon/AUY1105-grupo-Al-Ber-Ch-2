@@ -13,3 +13,8 @@ resource "aws_instance" "duocapp" {
   associate_public_ip_address = false  # Quita IP pública si no es necesaria
 }
 
+root_block_device {
+  encrypted = true
+}
+
+ebs_optimized = true

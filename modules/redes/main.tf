@@ -11,7 +11,7 @@ resource "aws_subnet" "AUY1105-duocapp-subnet" {
 resource "aws_security_group" "example" {
   name        = "example-sg"
   description = "SG para instancias EC2"
-  vpc_id      = aws_vpc.main.id
+  vpc_id      = aws_vpc.AUY1105-duocapp-vpc.id
 
   ingress {
     from_port   = 22
@@ -30,7 +30,6 @@ resource "aws_security_group" "example" {
   }
 }
 
-
 resource "aws_internet_gateway" "igw" {
   vpc_id = aws_vpc.AUY1105-duocapp-vpc.id
 }
@@ -48,3 +47,15 @@ resource "aws_route_table_association" "rta" {
   subnet_id      = aws_subnet.AUY1105-duocapp-subnet.id
   route_table_id = aws_route_table.rt.id
 }
+
+resource "aws_cloudwatch_log_group" "vpc_logs" {
+  name              = "vpc-flow-logs"
+  retention_in_days = 7
+}
+
+resource "aws_flow_log" "vpc" {
+  vpc_id          = aws_vpc.AUY1105-duocapp-vpc.id
+  log_destination = aws_cloudwatch_log_group.vpc_logs.arn
+  traffic_type    = "ALL"
+}
+
