@@ -34,4 +34,18 @@
 - **Infraestructura:** Se parametrizó el tipo de instancia EC2 en `variables.tf` y `main.tf`, asegurando el cumplimiento de la política OPA que restringe el uso a `t2.micro`.
 - **Documentación:** Se agregaron descripciones detalladas a las variables de red y cómputo para mejorar la mantenibilidad del código.
 
-## [1.3.0] - 2026-06-04
+## [2.0.0] - 2026-06-04
+## Added
+- Creación de la carpeta `modules` con subcarpetas `computo` y `redes`.
+- Modificación de `infra/main.tf` para orquestar los módulos.
+
+## [2.1.0] - 2026-06-05
+## Added
+- Modificación en `variables.tf` dentro de `modules/`.
+- Actualización en todos los `outputs.tf`.
+- Modificación de `pipeline.yml`.
+- Ajustes en `computo.tf` y `redes.tf`.
+
+## [2.1.1] - 2026-06-05
+## Added
+- Se agrego `hi-hello.gif` a `README.md`

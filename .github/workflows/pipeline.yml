@@ -17,11 +17,17 @@ jobs:
       - name: Setup TFLint
         uses: terraform-linters/setup-tflint@v4
 
+      - name: Run TFLint
+        run: tflint --chdir=infra
+
       - name: Run Checkov
         uses: bridgecrewio/checkov-action@master
         with:
-            directory: infra/
-            soft_fail: true 
+          directory: infra/
+          soft_fail: true
 
       - name: Terraform Validate
-        run: terraform validate
+        run: terraform -chdir=infra validate
+
+      - name: Run OPA
+        run: opa eval --data policies/ --input infra/terraform.json "data.terraform.security.deny"
