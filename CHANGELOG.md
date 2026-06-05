@@ -53,3 +53,4 @@
 ## [2.1.1] - 2026-06-05
 ## Fixed
 - Se arreglo `variables.tf` dentro de `infra`
+- Se arreglo `pipeline.yml`
