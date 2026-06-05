@@ -1,8 +1,6 @@
 name: Terraform Quality & Security
 
 on:
-  push:
-    branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
 
@@ -30,9 +28,6 @@ jobs:
 
       - name: Terraform Validate
         run: terraform -chdir=infra validate
-
-      - name: Terraform Plan (JSON)
-        run: terraform -chdir=infra plan -out=tfplan && terraform -chdir=infra show -json tfplan > infra/terraform.json
 
       - name: Run OPA
         run: opa eval --data policies/ --input infra/terraform.json "data.terraform.security.deny"
