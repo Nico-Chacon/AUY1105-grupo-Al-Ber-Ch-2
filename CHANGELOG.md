@@ -54,3 +54,15 @@
 ## Fixed
 - Se arreglo `variables.tf` dentro de `infra`
 - Se arreglo `pipeline.yml`
+
+## [2.1.2] - 2026-06-05
+## Added
+- Se tiparon todas las variables en `infra/variables.tf` (`type = string`).
+- Se agregaron `description` en reglas de seguridad (SG) y se evitó usar el default SG.
+- En EC2:
+  - Activado `monitoring = true`.
+  - Forzado IMDSv2 (`http_tokens = "required"`).
+  - Eliminada IP pública (opcional).
+- Pipeline:
+  - Ajustado trigger para `push` y `pull_request`.
+  - Agregado paso `Terraform Plan (JSON)` para OPA.

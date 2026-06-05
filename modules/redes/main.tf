@@ -8,16 +8,17 @@ resource "aws_subnet" "AUY1105-duocapp-subnet" {
   availability_zone = var.availability_zone
 }
 
-resource "aws_security_group" "AUY1105-duocapp-sg" {
-  vpc_id      = aws_vpc.AUY1105-duocapp-vpc.id
-  name        = "AUY1105-duocapp-sg"
-  description = "Permite solo acceso SSH desde mi IP"
+resource "aws_security_group" "example" {
+  name        = "example-sg"
+  description = "SG para instancias EC2"
+  vpc_id      = aws_vpc.main.id
 
   ingress {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
     cidr_blocks = [var.my_ip]
+    description = "Acceso SSH desde mi IP"
   }
 
   egress {
@@ -25,8 +26,10 @@ resource "aws_security_group" "AUY1105-duocapp-sg" {
     to_port     = 0
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
+    description = "Salida a internet"
   }
 }
+
 
 resource "aws_internet_gateway" "igw" {
   vpc_id = aws_vpc.AUY1105-duocapp-vpc.id
