@@ -8,15 +8,16 @@ module "redes" {
   vpc_cidr          = var.vpc_cidr
   subnet_cidr       = var.subnet_cidr
   availability_zone = var.availability_zone
-  my_ip             = var.my_ip
+  my_ip             = "191.112.213.33/32"
 }
 
 module "computo" {
   source        = "../modules/computo"
   ami_id        = var.ami_id
-  instance_type = "t2.micro"
+  instance_type = var.instance_type
   subnet_id     = module.redes.subnet_id
   sg_id         = module.redes.sg_id
+  key_name      = "ec2-key-1"
 }
 
 resource "aws_vpc" "AUY1105-duocapp-vpc" {
@@ -49,17 +50,6 @@ resource "aws_security_group" "AUY1105-duocapp-sg" {
   }
 }
 
-resource "aws_instance" "AUY1105-duocapp-ec2" {
-  ami                    = var.ami_id
-  instance_type          = "t2.micro"
-  subnet_id              = aws_subnet.AUY1105-duocapp-subnet.id
-  vpc_security_group_ids = [aws_security_group.AUY1105-duocapp-sg.id]
-
-  tags = {
-    Name = "AUY1105-duocapp-ec2"
-  }
-}
-
 resource "aws_internet_gateway" "igw" {
   vpc_id = aws_vpc.AUY1105-duocapp-vpc.id
 }
@@ -77,12 +67,4 @@ resource "aws_route_table_association" "rta" {
   subnet_id      = aws_subnet.AUY1105-duocapp-subnet.id
   route_table_id = aws_route_table.rt.id
 }
-resource "aws_instance" "example" {
-  ami           = var.ami
-  instance_type = "t2.micro"
 
-  tags = {
-    Name        = "AUV1105-duocapp-ec2"
-    Environment = "dev"   
-  }
-}
